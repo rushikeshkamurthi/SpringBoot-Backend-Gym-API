@@ -15,7 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+// In this class you  have exented WebSecurityConfigurerAdapter to overide default login and security methods.
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class securityConfig extends WebSecurityConfigurerAdapter {
     private  final UserDetailsService userDetailsService;
@@ -27,9 +27,9 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+       // http.authorizeRequests().anyRequest().permitAll();// This line is for permiting all Http request to acces the API without blocking
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-       customAuthenticationFilter.setFilterProcessesUrl("/api/login");
-
+        customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/api/login/**","/api/token/refresh/**").permitAll(); // when you have custom login page

@@ -81,6 +81,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>
+			CICD-Integreation-example
+		</finalName>
 	</build>
 
 </project>
